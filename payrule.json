@@ -1,0 +1,173 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "retrieve_payrule_name_flow API",
+    "description" : "API to invoke the execution of the decision service operation retrieve_payrule_name_flow.",
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "https://ds.robobob.ca/DecisionService/rest"
+  } ],
+  "security" : [ {
+    "basicAuthentication" : [ ]
+  } ],
+  "paths" : {
+    "/FCL/retrieve_payrule_name_flow" : {
+      "post" : {
+        "summary" : "Invokes the execution of the decision service operation retrieve_payrule_name_flow.",
+        "description" : "Executes the decision service operation retrieve_payrule_name_flow with the path /FCL/retrieve_payrule_name_flow.",
+        "operationId" : "callretrieve_payrule_name_flowDecisionServiceOperation",
+        "requestBody" : {
+          "description" : "Request for the execution of the decision service operation. Contains notably the input parameters that are used for the execution.",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Request"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Response for the execution of the decision service operation. Contains notably the output parameters that are returned by the execution.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Error occurring when invoking the execution of the decision service operation.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Request" : {
+        "type" : "object",
+        "properties" : {
+          "__DecisionID__" : {
+            "type" : "string",
+            "description" : "Unique identifier representing the execution of the decision service operation. If it is not specified, it will be computed automatically."
+          },
+          "request" : {
+            "$ref" : "#/components/schemas/PayRuleRequest"
+          }
+        },
+        "description" : "Request for the execution of the decision service operation. Contains notably the input parameters that are used for the execution."
+      },
+      "Response" : {
+        "type" : "object",
+        "properties" : {
+          "__DecisionID__" : {
+            "type" : "string",
+            "description" : "Unique identifier representing the execution of the decision service operation. If it is not specified, it will be computed automatically."
+          },
+          "response" : {
+            "$ref" : "#/components/schemas/PayRuleResponse"
+          }
+        },
+        "description" : "Response for the execution of the decision service operation. Contains notably the output parameters that are returned by the execution."
+      },
+      "PayRuleRequest" : {
+        "type" : "object",
+        "properties" : {
+          "retailNumber" : {
+            "type" : "string"
+          },
+          "empNumber" : {
+            "type" : "string"
+          },
+          "regionCode" : {
+            "type" : "string"
+          },
+          "orgType" : {
+            "type" : "string"
+          },
+          "workerType" : {
+            "type" : "string"
+          },
+          "hoursPerDay" : {
+            "type" : "string"
+          },
+          "hoursPerWeek" : {
+            "type" : "string"
+          },
+          "hrEffDate" : {
+            "type" : "string"
+          },
+          "department" : {
+            "type" : "string"
+          },
+          "managerSignoffDate" : {
+            "type" : "string"
+          },
+          "hireDate" : {
+            "type" : "string"
+          }
+        }
+      },
+      "PayRuleResponse" : {
+        "type" : "object",
+        "properties" : {
+          "payRuleName" : {
+            "type" : "string"
+          },
+          "effectiveDate" : {
+            "type" : "string"
+          },
+          "success" : {
+            "type" : "boolean"
+          },
+          "messages" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "Error" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "HTTP error code.",
+            "format" : "int32"
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "Error message."
+          },
+          "details" : {
+            "type" : "string",
+            "description" : "Detailed error message."
+          },
+          "errorCode" : {
+            "type" : "string",
+            "description" : "Product error code."
+          }
+        },
+        "description" : "Error occurring when invoking the execution of the decision service operation."
+      }
+    },
+    "securitySchemes" : {
+      "basicAuthentication" : {
+        "type" : "http",
+        "scheme" : "basic"
+      }
+    }
+  }
+}
